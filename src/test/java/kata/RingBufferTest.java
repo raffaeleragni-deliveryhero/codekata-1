@@ -1,3 +1,5 @@
+package kata;
+
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -59,30 +61,26 @@ class RingBufferTest {
     buffer.add("item");
     assertThat(buffer.size(), is(1));
   }
-  
+
   @Test
-  public void whenAddTwoItems() {
+  void whenAddTwoItems() {
     buffer.add("item1");
     buffer.add("item2");
-    
+
     assertThat(buffer.get(), is("item1"));
     assertThat(buffer.get(), is("item2"));
   }
-  
+
   @Test
-  public void getWhenBufferEmpty() {
+  void getWhenBufferEmpty() {
     assertThrows(IllegalStateException.class, () -> buffer.get());
   }
 
   @Test
-  public void assertIsCleared(){
+  void assertIsCleared(){
     buffer.add("item");
     assertThat(buffer.isEmpty(), is(false));
     buffer.clear();
     assertThat(buffer.isEmpty(), is(true));
-
   }
-
-
-
 }
