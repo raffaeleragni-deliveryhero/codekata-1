@@ -11,22 +11,43 @@ public class RingBuffer {
       throw new IllegalArgumentException("not to be 0");
     }
     buffer = new String[maxSize];
+    writePointer = 0;
+    readPointer = 0;
   }
 
   public boolean isEmpty() {
-    return writePointer == readPointer;
+    return size() == 0;
   }
 
+  /*
+   *  
+   */
   public int size() {
-    return writePointer - readPointer;
+    var writeDistance = buffer.length - writePointer;
+    var readDistance = buffer.length - readPointer;
+    
+    if (writeDistance <= readDistance) {
+      return writePointer - readPointer;
+    }
+    
+    return writePointer + readDistance;
   }
 
   public void add(String item) {
     ensureNotNull(item);
-    if(writePointer == buffer.length){
-      throw new IllegalStateException("max size reached");
+    if (isFull()) {
+      throw new IllegalStateException("Buffer full");
     }
+    
+    if(writePointer == buffer.length) {
+      writePointer = 0;
+    }
+    
     insertItem(item);
+  }
+
+  private boolean isFull() {
+    return size() == buffer.length;
   }
 
   void insertItem(String item) {

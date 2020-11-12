@@ -101,4 +101,28 @@ class RingBufferTest {
     
     assertThrows(IllegalStateException.class, () -> buffer.add("item1"));
   }
+  
+//  @Test
+  void testBuffering() {
+    //write into
+    for (int i = 0;i < 10;i++) {
+      buffer.add("item" + i);
+    }
+    
+    //read
+    for (int i = 0;i < 5;i++) {
+      buffer.get();
+    }
+    
+    for (int i = 0;i < 5;i++) {
+      buffer.add("newItem" + i);
+    }
+    
+    assertThat(buffer.size(), is(10));
+  }
+  
+  @Test
+  void testRead() {
+    
+  }
 }
