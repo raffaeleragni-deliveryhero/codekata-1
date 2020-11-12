@@ -94,7 +94,7 @@ class RingBufferTest {
     assertThrows(IllegalArgumentException.class, () -> new RingBuffer(-1));
   }
   
-//  @Test
+  @Test
   void testOverflow() {
     buffer = new RingBuffer(1);
     buffer.add("item1");
