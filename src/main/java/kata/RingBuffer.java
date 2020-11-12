@@ -24,7 +24,7 @@ public class RingBuffer {
     queue.add(item);
   }
 
-  void ensureNotNull(String item) throws IllegalArgumentException {
+  void ensureNotNull(String item) {
     if(item == null){
       throw new IllegalArgumentException("The item is empty!");
     }
