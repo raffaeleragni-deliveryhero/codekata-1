@@ -7,6 +7,14 @@ public class RingBuffer {
 
   int size;
   Deque<String> queue = new LinkedList<>();
+//  final int maxSize;
+
+  public RingBuffer(int maxSize) {
+    if (maxSize <= 0) {
+      throw new IllegalArgumentException("not to be 0");
+    }
+//    this.maxSize = maxSize;
+  }
 
   public boolean isEmpty() {
     return size == 0;
