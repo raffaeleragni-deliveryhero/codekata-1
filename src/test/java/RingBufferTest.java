@@ -31,8 +31,32 @@ class RingBufferTest {
       buffer.add(null);
     });
     assertThat(buffer.isEmpty(), is(true));
-
   }
 
+  @Test
+  void testItemSaved() {
+    buffer.add("item");
+    var item = buffer.get();
 
+    assertThat(item, is("item"));
+  }
+
+  @Test
+  void testItem2Saved() {
+    buffer.add("item2");
+    var item = buffer.get();
+
+    assertThat(item, is("item2"));
+  }
+
+  @Test
+  void testSizeZero() {
+    assertThat(buffer.size(), is(0));
+  }
+
+  @Test
+  void testSize1() {
+    buffer.add("item");
+    assertThat(buffer.size(), is(1));
+  }
 }

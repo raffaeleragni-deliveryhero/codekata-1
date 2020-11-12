@@ -1,19 +1,26 @@
 
 public class RingBuffer {
 
-  boolean empty = true;
-  
-  boolean isEmpty() {
-    return empty;
+  int size;
+  String item;
+
+  public boolean isEmpty() {
+    return size == 0;
+  }
+
+  public int size() {
+    return size;
   }
 
   public void add(String item) {
     if(item == null){
       throw new IllegalArgumentException("The item is empty!");
     }
-    empty = false;
+    size++;
+    this.item = item;
   }
 
-
-
+  public String get() {
+    return item;
+  }
 }
