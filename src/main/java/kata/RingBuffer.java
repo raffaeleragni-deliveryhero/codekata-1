@@ -1,37 +1,37 @@
 package kata;
 
-import java.util.Deque;
-import java.util.LinkedList;
-
 public class RingBuffer {
 
-  int size;
-  Deque<String> queue = new LinkedList<>();
-  final int maxSize;
+  int readPointer;
+  int writePointer;
+  final String[] buffer;
 
   public RingBuffer(int maxSize) {
     if (maxSize <= 0) {
       throw new IllegalArgumentException("not to be 0");
     }
-    this.maxSize = maxSize;
+    buffer = new String[maxSize];
   }
 
   public boolean isEmpty() {
-    return size == 0;
+    return writePointer == readPointer;
   }
 
   public int size() {
-    return size;
+    return writePointer - readPointer;
   }
 
   public void add(String item) {
     ensureNotNull(item);
-    if(size == maxSize){
+    if(writePointer == buffer.length){
       throw new IllegalStateException("max size reached");
     }
-    size++;
+    insertItem(item);
+  }
 
-    queue.add(item);
+  void insertItem(String item) {
+    buffer[writePointer] = item;
+    writePointer++;
   }
 
   void ensureNotNull(String item) {
@@ -45,12 +45,17 @@ public class RingBuffer {
       throw new IllegalStateException();
     }
 
-    return queue.poll();
+    return fetchItem();
+  }
+
+  String fetchItem() {
+    var result = buffer[readPointer];
+    readPointer++;
+    return result;
   }
 
   public void clear(){
-    queue.clear();
-    size =0;
+    writePointer = 0;
   }
 
 }
