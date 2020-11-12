@@ -1,9 +1,11 @@
+import java.util.Deque;
+import java.util.LinkedList;
 
 public class RingBuffer {
 
   int size;
-  String item;
-
+  Deque<String> queue = new LinkedList<>();
+  
   public boolean isEmpty() {
     return size == 0;
   }
@@ -16,11 +18,17 @@ public class RingBuffer {
     if(item == null){
       throw new IllegalArgumentException("The item is empty!");
     }
+    
     size++;
-    this.item = item;
+    
+    queue.add(item);
   }
 
   public String get() {
-    return item;
+    if (isEmpty()) {
+      throw new IllegalStateException();
+    }
+    
+    return queue.poll();
   }
 }

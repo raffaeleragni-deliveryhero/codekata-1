@@ -59,4 +59,18 @@ class RingBufferTest {
     buffer.add("item");
     assertThat(buffer.size(), is(1));
   }
+  
+  @Test
+  public void whenAddTwoItems() {
+    buffer.add("item1");
+    buffer.add("item2");
+    
+    assertThat(buffer.get(), is("item1"));
+    assertThat(buffer.get(), is("item2"));
+  }
+  
+  @Test
+  public void getWhenBufferEmpty() {
+    assertThrows(IllegalStateException.class, () -> buffer.get());
+  }
 }
