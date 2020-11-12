@@ -14,6 +14,12 @@ class RingBufferTest {
   }
 
   @Test
+  void testIsNotEmpty() {
+    buffer.add("test");
+    assertThat(buffer.isEmpty(), is(false));
+  }
+  
+  @Test
   void testIsEmpty() {
     assertThat(buffer.isEmpty(), is(true));
   }
