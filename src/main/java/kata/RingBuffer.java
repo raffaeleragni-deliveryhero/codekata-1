@@ -2,6 +2,7 @@ package kata;
 
 public class RingBuffer {
 
+  boolean full;
   int readPointer;
   int writePointer;
   final String[] buffer;
@@ -19,40 +20,39 @@ public class RingBuffer {
     return size() == 0;
   }
 
-  /*
-   *  
-   */
   public int size() {
+    if (full)
+      return buffer.length;
+
     var writeDistance = buffer.length - writePointer;
     var readDistance = buffer.length - readPointer;
-    
+
     if (writeDistance <= readDistance) {
       return writePointer - readPointer;
     }
-    
+
     return writePointer + readDistance;
   }
 
   public void add(String item) {
     ensureNotNull(item);
-    if (isFull()) {
+    if (full) {
       throw new IllegalStateException("Buffer full");
     }
-    
-    if(writePointer == buffer.length) {
-      writePointer = 0;
-    }
-    
+
     insertItem(item);
   }
 
-  private boolean isFull() {
-    return size() == buffer.length;
-  }
-
   void insertItem(String item) {
+    if (writePointer == buffer.length)
+      writePointer = 0;
+
     buffer[writePointer] = item;
+
     writePointer++;
+
+    if (size() == buffer.length || writePointer == readPointer)
+      full = true;
   }
 
   void ensureNotNull(String item) {
@@ -70,8 +70,14 @@ public class RingBuffer {
   }
 
   String fetchItem() {
+    if (readPointer == buffer.length)
+      readPointer = 0;
+
     var result = buffer[readPointer];
+
     readPointer++;
+    full = false;
+
     return result;
   }
 

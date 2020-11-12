@@ -83,46 +83,46 @@ class RingBufferTest {
     buffer.clear();
     assertThat(buffer.isEmpty(), is(true));
   }
-  
+
   @Test
   void testWhenMaxLimitIsZero() {
     assertThrows(IllegalArgumentException.class, () -> new RingBuffer(0));
   }
-  
+
   @Test
   void testWhenMaxLimitIsNegative() {
     assertThrows(IllegalArgumentException.class, () -> new RingBuffer(-1));
   }
-  
+
   @Test
   void testOverflow() {
     buffer = new RingBuffer(1);
     buffer.add("item1");
-    
+
     assertThrows(IllegalStateException.class, () -> buffer.add("item1"));
   }
-  
-//  @Test
+
+  @Test
   void testBuffering() {
     //write into
     for (int i = 0;i < 10;i++) {
       buffer.add("item" + i);
     }
-    
+
     //read
     for (int i = 0;i < 5;i++) {
       buffer.get();
     }
-    
+
     for (int i = 0;i < 5;i++) {
       buffer.add("newItem" + i);
     }
-    
+
     assertThat(buffer.size(), is(10));
   }
-  
+
   @Test
   void testRead() {
-    
+
   }
 }
