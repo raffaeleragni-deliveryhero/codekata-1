@@ -73,4 +73,16 @@ class RingBufferTest {
   public void getWhenBufferEmpty() {
     assertThrows(IllegalStateException.class, () -> buffer.get());
   }
+
+  @Test
+  public void assertIsCleared(){
+    buffer.add("item");
+    assertThat(buffer.isEmpty(), is(false));
+    buffer.clear();
+    assertThat(buffer.isEmpty(), is(true));
+
+  }
+
+
+
 }

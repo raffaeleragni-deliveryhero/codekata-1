@@ -31,4 +31,10 @@ public class RingBuffer {
     
     return queue.poll();
   }
+
+  public void clear(){
+    queue.clear();
+    size =0;
+  }
+
 }
