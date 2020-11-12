@@ -8,7 +8,12 @@ public class RingBuffer {
   }
 
   public void add(String item) {
+    if(item == null){
+      throw new IllegalArgumentException("The item is empty!");
+    }
     empty = false;
   }
+
+
 
 }
