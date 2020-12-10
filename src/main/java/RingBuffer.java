@@ -1,13 +1,14 @@
 
 public class RingBuffer {
   final int maxSize;
+  int size;
 
   public RingBuffer(int maxSize) {
     this.maxSize = maxSize;
   }
 
   public boolean isEmpty() {
-    return true;
+    return size == 0;
   }
 
   public int maxSize() {
@@ -15,6 +16,14 @@ public class RingBuffer {
   }
 
   public int size() {
-    return 0;
+    return size;
+  }
+
+  public void addItem(int i) {
+    size++;
+  }
+
+  public int getItem() {
+    return 1;
   }
 }

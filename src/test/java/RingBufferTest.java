@@ -1,4 +1,7 @@
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,4 +33,27 @@ class RingBufferTest {
     assertThat(buffer.size(), is(0));
   }
 
+  @Test
+  void testAddItem() {
+    buffer.addItem(1);
+    
+    assertFalse(buffer.isEmpty());
+    assertThat(buffer.size(), is(1));
+  }
+  
+  @Test
+  void testAddMultipleItems() {
+    buffer.addItem(1);
+    buffer.addItem(2);
+    
+    assertThat(buffer.size(), is(2));
+  }
+  
+  @Test
+  void testGetItem() {
+    buffer.addItem(1);
+    var item = buffer.getItem();
+    
+    assertThat(item, is(1));
+  }
 }
