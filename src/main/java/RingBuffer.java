@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 
 public class RingBuffer {
   final int maxSize;
@@ -19,11 +20,23 @@ public class RingBuffer {
     return size;
   }
 
+  public boolean isFull(){
+    return size() == maxSize();
+  }
+
   public void addItem(int i) {
+    if(isFull()){
+      throw new IllegalStateException("The buffer is full!");
+    }
+
     size++;
   }
 
   public int getItem() {
+
+    if(isEmpty()) {
+      throw new NoSuchElementException("The buffer is empty!");
+    }
     return 1;
   }
 }

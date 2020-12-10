@@ -1,12 +1,11 @@
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class RingBufferTest {
@@ -55,5 +54,24 @@ class RingBufferTest {
     var item = buffer.getItem();
     
     assertThat(item, is(1));
+  }
+
+  @Test
+  void testWhenEmpty(){
+    assertThrows(NoSuchElementException.class,
+            () -> buffer.getItem());
+
+  }
+
+  @Test
+  void testAddWhenMaxSize(){
+
+    int i = 0;
+    while (i < 5){
+      buffer.addItem(i);
+      i++;
+    }
+    assertThrows(IllegalStateException.class,
+            () -> buffer.addItem(6));
   }
 }
