@@ -26,6 +26,11 @@ class RingBufferTest {
   void testMaxSize() {
     assertThat(buffer.maxSize(), is(5));
   }
+  
+  @Test
+  void testMaxSizeAsNegative() {
+    assertThrows(IllegalArgumentException.class, () -> new RingBuffer(-2));
+  }
 
   @Test
   void testSize() {
@@ -104,5 +109,22 @@ class RingBufferTest {
     assertThat(buffer.getItem(), is(7));
     assertThat(buffer.getItem(), is(8));
 
+  }
+  
+  @Test
+  void testWithDifferentMaxSize() {
+    buffer = new RingBuffer(3);
+    
+    buffer.addItem(1);
+    buffer.addItem(2);
+    buffer.addItem(3);
+    assertThat(buffer.getItem(), is(1));
+    assertThat(buffer.getItem(), is(2));
+
+    buffer.addItem(4);
+    buffer.addItem(5);
+    assertThat(buffer.getItem(), is(3));
+    assertThat(buffer.getItem(), is(4));
+    assertThat(buffer.getItem(), is(5));
   }
 }

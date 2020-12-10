@@ -8,6 +8,10 @@ public class RingBuffer {
   int readPointer;
 
   public RingBuffer(int maxSize) {
+    if (maxSize < 0) {
+      throw new IllegalArgumentException();
+    }
+    
     this.maxSize = maxSize;
     this.items = new int[maxSize];
   }
@@ -36,7 +40,7 @@ public class RingBuffer {
     size++;
     items[writePointer] = item;
     writePointer++;
-    writePointer = writePointer % 5;
+    writePointer = writePointer % maxSize;
   }
 
   public int getItem() {
@@ -45,7 +49,7 @@ public class RingBuffer {
     }
     var item = items[readPointer];
     readPointer++;
-    readPointer = readPointer % 5;
+    readPointer = readPointer % maxSize;
     size--;
     return item;
   }
