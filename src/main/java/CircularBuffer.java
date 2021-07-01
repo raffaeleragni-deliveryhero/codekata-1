@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-public class CircularBuffer {
-
-=======
-
 public class CircularBuffer {
 
   int[] items = new int[2];
@@ -38,5 +33,5 @@ public class CircularBuffer {
     bufferStart++;
     return value;
   }
->>>>>>> circular buffer implementation
+
 }

@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-import org.junit.jupiter.api.Test;
-
-public class CircularBufferTest {
-    CircularBuffer buffer;
-
-    @Test
-    void isEmpty(){
-
-    }
-=======
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -121,5 +109,4 @@ class CircularBufferTest {
     buffer.add(55);
     assertThrows(IllegalStateException.class, () -> buffer.add(99999));
   }
->>>>>>> circular buffer implementation
 }
